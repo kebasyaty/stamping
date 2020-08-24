@@ -1,10 +1,8 @@
 [package]
 authors = ["kebasyaty <kebasyaty@gmail.com>"]
 edition = "2018"
-name = "lesson"
+name = "stamping"
 version = "0.1.0"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
 actix-cors = "0.2.0"
