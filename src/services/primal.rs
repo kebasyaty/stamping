@@ -3,22 +3,36 @@ use tera::{Context, Tera};
 
 use super::super::settings;
 
+pub use configure_urls::*;
+pub use request_handlers::*;
+
 // CONFIGURE URLs ==================================================================================
-pub fn config(cfg: &mut web::ServiceConfig) {
-    cfg.service(web::resource("/").route(web::get().to(index)));
+pub mod configure_urls {
+    use super::*;
+
+    pub fn config(cfg: &mut web::ServiceConfig) {
+        cfg.service(web::resource("/").route(web::get().to(index)));
+    }
 }
 
 // REQUEST HANDLERS ================================================================================
-// Home page
-async fn index(app_state: web::Data<settings::AppState>, tmpl: web::Data<Tera>) -> impl Responder {
-    let mut ctx = Context::new();
-    ctx.insert("title", &app_state.get_app_name().to_owned());
-    ctx.insert(
-        "description",
-        &"Lorem ipsum dolor sit amet, consectetur adipiscing elit.".to_owned(),
-    );
-    let rendered = tmpl.render("index.html", &ctx).unwrap();
-    HttpResponse::Ok().content_type("text/html").body(rendered)
+pub mod request_handlers {
+    use super::*;
+
+    // Home page
+    pub async fn index(
+        app_state: web::Data<settings::AppState>,
+        tmpl: web::Data<Tera>,
+    ) -> impl Responder {
+        let mut ctx = Context::new();
+        ctx.insert("title", &app_state.get_app_name().to_owned());
+        ctx.insert(
+            "description",
+            &"Lorem ipsum dolor sit amet, consectetur adipiscing elit.".to_owned(),
+        );
+        let rendered = tmpl.render("index.html", &ctx).unwrap();
+        HttpResponse::Ok().content_type("text/html").body(rendered)
+    }
 }
 
 // TESTS ===========================================================================================
