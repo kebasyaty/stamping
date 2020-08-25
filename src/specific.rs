@@ -5,30 +5,34 @@ use actix_web::{http, web, HttpRequest, HttpResponse, Responder, Result};
 use tera::{Context, Tera};
 
 use super::settings;
+pub use request_handlers::*;
 
 // REQUEST HANDLERS ================================================================================
-// Favicon
-pub async fn favicon(app_state: web::Data<settings::AppState>) -> Result<NamedFile> {
-    let path = app_state.get_static_root("favicons/favicon.ico");
-    Ok(NamedFile::open(path)?)
-}
-// Robots
-pub async fn robots(req: HttpRequest, tmpl: web::Data<Tera>) -> impl Responder {
-    let mut ctx = Context::new();
-    ctx.insert("scheme", &req.connection_info().scheme().to_owned());
-    ctx.insert("host", &req.connection_info().host().to_owned());
-    let rendered = tmpl.render("robots.txt", &ctx).unwrap();
-    HttpResponse::Ok().body(rendered)
-}
-// Sitemap
-pub async fn sitemap(app_state: web::Data<settings::AppState>) -> Result<NamedFile> {
-    let path = app_state.get_template("sitemap.xml");
-    Ok(NamedFile::open(path)?)
-}
-// Page 404
-pub async fn page_404(app_state: web::Data<settings::AppState>) -> Result<NamedFile> {
-    let path = app_state.get_template("404.html");
-    Ok(NamedFile::open(path)?.set_status_code(http::StatusCode::NOT_FOUND))
+pub mod request_handlers {
+    use super::*;
+    // Favicon
+    pub async fn favicon(app_state: web::Data<settings::AppState>) -> Result<NamedFile> {
+        let path = app_state.get_static_root("favicons/favicon.ico");
+        Ok(NamedFile::open(path)?)
+    }
+    // Robots
+    pub async fn robots(req: HttpRequest, tmpl: web::Data<Tera>) -> impl Responder {
+        let mut ctx = Context::new();
+        ctx.insert("scheme", &req.connection_info().scheme().to_owned());
+        ctx.insert("host", &req.connection_info().host().to_owned());
+        let rendered = tmpl.render("robots.txt", &ctx).unwrap();
+        HttpResponse::Ok().body(rendered)
+    }
+    // Sitemap
+    pub async fn sitemap(app_state: web::Data<settings::AppState>) -> Result<NamedFile> {
+        let path = app_state.get_template("sitemap.xml");
+        Ok(NamedFile::open(path)?)
+    }
+    // Page 404
+    pub async fn page_404(app_state: web::Data<settings::AppState>) -> Result<NamedFile> {
+        let path = app_state.get_template("404.html");
+        Ok(NamedFile::open(path)?.set_status_code(http::StatusCode::NOT_FOUND))
+    }
 }
 
 // TESTS ===========================================================================================
