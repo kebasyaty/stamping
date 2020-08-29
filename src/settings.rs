@@ -70,8 +70,8 @@ pub mod application_state {
     }
 
     impl AppState {
-        pub fn new() -> AppState {
-            AppState {
+        pub fn new() -> Self {
+            Self {
                 debug: DEBUG,
                 app_name: PROJECT_NAME.to_string(),
                 media_url: MEDIA_URL.to_string(),

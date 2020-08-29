@@ -25,10 +25,10 @@ pub mod request_handlers {
         tmpl: web::Data<Tera>,
     ) -> impl Responder {
         let mut ctx = Context::new();
-        ctx.insert("title", &app_state.get_app_name().to_owned());
+        ctx.insert("title", &app_state.get_app_name());
         ctx.insert(
             "description",
-            &"Lorem ipsum dolor sit amet, consectetur adipiscing elit.".to_owned(),
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
         );
         let rendered = tmpl.render("index.html", &ctx).unwrap();
         HttpResponse::Ok().content_type("text/html").body(rendered)
