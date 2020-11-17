@@ -1,7 +1,7 @@
 use actix_web::{web, HttpResponse, Responder};
 use tera::{Context, Tera};
 
-use super::super::settings;
+use crate::settings;
 
 pub use configure_urls::*;
 pub use request_handlers::*;
