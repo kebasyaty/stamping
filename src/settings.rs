@@ -4,7 +4,8 @@ pub use application_state::*;
 pub use corrective_functions::*;
 pub use default_settings::*;
 
-// DEFAULT SETTINGS ================================================================================
+// DEFAULT SETTINGS
+// #################################################################################################
 pub mod default_settings {
     // Development status
     pub static DEBUG: bool = true;
@@ -30,7 +31,8 @@ pub mod default_settings {
     pub static TEMPLATES: &str = "./templates/";
 }
 
-// CORRECTIVE FUNCTIONS ============================================================================
+// CORRECTIVE FUNCTIONS
+// #################################################################################################
 pub mod corrective_functions {
     use super::*;
 
@@ -61,7 +63,8 @@ pub mod corrective_functions {
     }
 }
 
-// APPLICATION STATE ===============================================================================
+// APPLICATION STATE
+// #################################################################################################
 pub mod application_state {
     use super::*;
 
@@ -117,12 +120,14 @@ pub mod application_state {
     }
 }
 
-// TESTS ===========================================================================================
+// TESTS
+// #################################################################################################
 #[cfg(test)]
 mod tests {
     use super::*;
 
-    // Corrective functions ------------------------------------------------------------------------
+    // Corrective functions
+    // *********************************************************************************************
     #[test]
     fn test_local_domain() {
         assert_eq!(local_domain(), "127.0.0.1:8088".to_string());
@@ -160,7 +165,8 @@ mod tests {
         assert_eq!(session_name(PROJECT_NAME), "example_session");
     }
 
-    // app state ----------------------------------------------------------------------------------
+    // App state
+    // *********************************************************************************************
     #[test]
     fn test_app_state() {
         let app_state = AppState::new();
