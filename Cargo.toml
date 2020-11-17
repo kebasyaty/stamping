@@ -3,9 +3,9 @@ authors = ["Firstname Lastname <example@gmail.com>"]
 description = ""
 edition = "2018"
 license = "MIT OR Apache-2.0"
-name = "stamping"
+name = "project-name"
 readme = "README.md"
-version = "0.1.0"
+version = "0.1.0-pre-alpha.0"
 
 [dependencies]
 actix-cors = "0.5"
