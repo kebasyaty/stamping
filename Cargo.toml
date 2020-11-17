@@ -1,6 +1,6 @@
 [package]
 authors = ["Firstname Lastname <example@gmail.com>"]
-description = ""
+description = "Some text"
 edition = "2018"
 license = "MIT OR Apache-2.0"
 name = "project-name"
