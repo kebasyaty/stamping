@@ -76,7 +76,9 @@ async fn main() -> std::io::Result<()> {
                 Cors::default()
                     .allowed_origin(settings::site_url(settings::DEBUG).as_str())
                     .allowed_methods(vec!["GET"])
+                    .allowed_headers(vec![http::header::AUTHORIZATION, http::header::ACCEPT])
                     .allowed_header(http::header::CONTENT_TYPE)
+                    .supports_credentials()
                     .max_age(if settings::DEBUG { None } else { Some(3600) }),
             )
             // Block `head` request
