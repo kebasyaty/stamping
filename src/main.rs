@@ -10,7 +10,7 @@ use tera::Tera;
 pub mod settings;
 // Specific request handlers (favicon, robots, sitemap, etc)
 pub mod specific;
-// Services (sub-apps)
+// Services (apps, sub-apps)
 pub mod services;
 
 #[actix_rt::main]
