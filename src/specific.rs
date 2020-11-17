@@ -7,7 +7,8 @@ use tera::{Context, Tera};
 use super::settings;
 pub use request_handlers::*;
 
-// REQUEST HANDLERS ================================================================================
+// REQUEST HANDLERS
+// #################################################################################################
 pub mod request_handlers {
     use super::*;
     // Favicon
@@ -35,14 +36,16 @@ pub mod request_handlers {
     }
 }
 
-// TESTS ===========================================================================================
+// TESTS
+// #################################################################################################
 #[cfg(test)]
 mod tests {
     use super::*;
     use actix_web::{http, test, App};
     use std::collections::HashMap;
 
-    // Handlers - Unit Tests -----------------------------------------------------------------------
+    // Handlers - Unit Tests
+    // *********************************************************************************************
     #[actix_rt::test]
     async fn test_handlers_ok() {
         let app_state = web::Data::new(settings::AppState::new());
