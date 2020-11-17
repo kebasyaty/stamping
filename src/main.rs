@@ -2,7 +2,7 @@ use actix_cors::Cors;
 use actix_files::Files;
 use actix_session::CookieSession;
 use actix_web::{http, middleware, web, App, HttpResponse, HttpServer};
-use chrono;
+//use chrono;
 use env_logger;
 use tera::Tera;
 
@@ -13,7 +13,7 @@ pub mod specific;
 // Services (apps, sub-apps)
 pub mod services;
 
-#[actix_rt::main]
+#[actix_web::main]
 async fn main() -> std::io::Result<()> {
     // Init logger middleware (debug, error, info, trace)
     std::env::set_var("RUST_LOG", "actix_web=info,actix_server=info");
@@ -68,16 +68,15 @@ async fn main() -> std::io::Result<()> {
                     .domain(settings::site_domain(settings::DEBUG).as_str())
                     .name(settings::session_name(settings::PROJECT_NAME))
                     .path("/")
-                    .max_age_time(chrono::Duration::days(1))
+                    //.max_age_time(chrono::Duration::days(1_i64))
                     .secure(!settings::DEBUG),
             )
             // Enable CORS
             .wrap(
-                Cors::new()
+                Cors::default()
                     .allowed_origin(settings::site_url(settings::DEBUG).as_str())
                     .allowed_methods(vec!["GET"])
-                    .max_age(3600)
-                    .finish(),
+                    .max_age(if settings::DEBUG { None } else { Some(3600) }),
             )
             // Block `head` request
             .route("*", web::head().to(|| HttpResponse::MethodNotAllowed()))
