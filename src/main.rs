@@ -2,7 +2,6 @@ use actix_cors::Cors;
 use actix_files::Files;
 use actix_session::CookieSession;
 use actix_web::{http, middleware, web, App, HttpResponse, HttpServer};
-//use chrono;
 use env_logger;
 use tera::Tera;
 
@@ -26,6 +25,13 @@ async fn main() -> std::io::Result<()> {
     HttpServer::new(move || {
         // Init Tera (template engine)
         let tera = Tera::new(concat!(env!("CARGO_MANIFEST_DIR"), "/templates/**/*")).unwrap();
+        // Init CORS
+        let cors = Cors::default()
+            .allowed_origin(settings::site_url(settings::DEBUG).as_str())
+            .allowed_methods(vec!["GET"])
+            .allowed_headers(vec![http::header::AUTHORIZATION, http::header::ACCEPT])
+            .allowed_header(http::header::CONTENT_TYPE)
+            .max_age(if settings::DEBUG { None } else { Some(3600) });
         // Init App
         App::new()
             // Enable Apps state
@@ -68,18 +74,11 @@ async fn main() -> std::io::Result<()> {
                     .domain(settings::site_domain(settings::DEBUG).as_str())
                     .name(settings::session_name(settings::PROJECT_NAME))
                     .path("/")
-                    //.max_age_time(chrono::Duration::days(1_i64))
+                    .max_age(1 * 86_400) // days * 86_400
                     .secure(!settings::DEBUG),
             )
             // Enable CORS
-            .wrap(
-                Cors::default()
-                    .allowed_origin(settings::site_url(settings::DEBUG).as_str())
-                    .allowed_methods(vec!["GET"])
-                    .allowed_headers(vec![http::header::AUTHORIZATION, http::header::ACCEPT])
-                    .allowed_header(http::header::CONTENT_TYPE)
-                    .max_age(if settings::DEBUG { None } else { Some(3600) }),
-            )
+            .wrap(cors)
             // Block `head` request
             .route("*", web::head().to(|| HttpResponse::MethodNotAllowed()))
             // Static files
