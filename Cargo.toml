@@ -1,7 +1,10 @@
 [package]
 authors = ["kebasyaty <kebasyaty@gmail.com>"]
+description = ""
 edition = "2018"
+license = "MIT OR Apache-2.0"
 name = "stamping"
+readme = "README.md"
 version = "0.1.0"
 
 [dependencies]
