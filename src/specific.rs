@@ -4,7 +4,7 @@ use actix_files::NamedFile;
 use actix_web::{http, web, HttpRequest, HttpResponse, Responder, Result};
 use tera::{Context, Tera};
 
-use super::settings;
+use crate::settings;
 pub use request_handlers::*;
 
 // REQUEST HANDLERS
