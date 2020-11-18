@@ -22,6 +22,7 @@ pub mod request_handlers {
     use super::*;
 
     // Home page
+    // *********************************************************************************************
     pub async fn index(
         app_state: web::Data<settings::AppState>,
         tmpl: web::Data<Tera>,
