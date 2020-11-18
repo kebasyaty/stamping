@@ -74,7 +74,7 @@ async fn main() -> std::io::Result<()> {
                     .domain(settings::site_domain(settings::DEBUG).as_str())
                     .name(settings::session_name(settings::PROJECT_NAME))
                     .path("/")
-                    .max_age(1 * 86_400) // days * 86_400
+                    .max_age(86_400) // 86_400 sec = 1 day
                     .secure(!settings::DEBUG),
             )
             // Enable CORS
