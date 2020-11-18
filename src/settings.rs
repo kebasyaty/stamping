@@ -10,7 +10,7 @@ pub mod default_settings {
     // Development status
     pub static DEBUG: bool = true;
     // Project
-    pub static PROJECT_NAME: &str = "Example";
+    pub static PROJECT_NAME: &str = "Project Name";
     // Http Server
     pub static LOCAL_DOMAIN: &str = "127.0.0.1";
     pub static PORT: u16 = 8088;
@@ -160,9 +160,9 @@ mod tests {
 
     #[test]
     fn test_session_name() {
-        assert_eq!(session_name("Example"), "example_session");
-        assert_eq!(session_name("Example Two"), "example_two_session");
-        assert_eq!(session_name(PROJECT_NAME), "example_session");
+        assert_eq!(session_name("Project Name"), "project_name_session");
+        assert_eq!(session_name("Project Name Two"), "project_name_two_session");
+        assert_eq!(session_name(PROJECT_NAME), "project_name_session");
     }
 
     // App state
@@ -172,7 +172,7 @@ mod tests {
         let app_state = AppState::new();
         // Testing of methods
         assert_eq!(app_state.get_debug(), DEBUG);
-        assert_eq!(app_state.get_app_name(), "Example".to_string());
+        assert_eq!(app_state.get_app_name(), "Project Name".to_string());
         assert_eq!(app_state.get_media_url("img.jpg"), "/media/img.jpg");
         assert_eq!(app_state.get_media_root("img.jpg"), "./media/img.jpg");
         assert_eq!(
