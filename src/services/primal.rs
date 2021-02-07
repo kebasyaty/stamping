@@ -1,5 +1,4 @@
 //! # Primal
-//!
 //! Service/Subapplication by default.
 //!
 
