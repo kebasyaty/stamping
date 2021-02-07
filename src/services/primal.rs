@@ -1,5 +1,7 @@
 //! # Primal
+//!
 //! Service/Subapplication by default.
+//!
 
 use actix_web::{web, HttpResponse, Responder};
 use tera::{Context, Tera};
