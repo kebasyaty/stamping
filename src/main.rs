@@ -105,7 +105,7 @@ async fn main() -> std::io::Result<()> {
             .route("/sitemap.xml", web::route().to(specific::sitemap))
             // ... <- Other services
             // Primal service (Home page)
-            .service(web::scope("/*").configure(services::primal::config))
+            .service(web::scope("*").configure(services::primal::config))
             // Page 404
             .default_service(web::route().to(specific::page_404))
     })
