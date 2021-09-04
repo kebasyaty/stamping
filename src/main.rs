@@ -99,7 +99,7 @@ async fn main() -> std::io::Result<()> {
             // Media files
             .service(Files::new("/media", settings::MEDIA_ROOT.to_owned()))
             // Specific handlers
-            .route("/favicon.ico", web::route().to(specific::favicon))
+            .route("/favicon.png", web::route().to(specific::favicon))
             .route("/robots.txt", web::route().to(specific::robots))
             .route("/sitemap.xml", web::route().to(specific::sitemap))
             // ... <- Other services
