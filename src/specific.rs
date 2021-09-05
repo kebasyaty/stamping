@@ -26,15 +26,15 @@ pub mod request_handlers {
         let rendered = tmpl.render("robots.txt", &ctx).unwrap();
         HttpResponse::Ok().body(rendered)
     }
-    // Sitemap
-    pub async fn sitemap(app_state: web::Data<settings::AppState>) -> Result<NamedFile> {
-        let path = app_state.format_template("sitemap.xml");
-        Ok(NamedFile::open(path)?)
-    }
     // Page 404
     pub async fn page_404(app_state: web::Data<settings::AppState>) -> Result<NamedFile> {
         let path = app_state.format_template("404.html");
         Ok(NamedFile::open(path)?.set_status_code(http::StatusCode::NOT_FOUND))
+    }
+    // Sitemap
+    pub async fn sitemap(app_state: web::Data<settings::AppState>) -> Result<NamedFile> {
+        let path = app_state.format_template("sitemap.xml");
+        Ok(NamedFile::open(path)?)
     }
 }
 
