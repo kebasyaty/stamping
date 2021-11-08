@@ -1,5 +1,5 @@
 [package]
-authors = ["Firstname Lastname <example@email.net>"]
+authors = ["First_name Last_name <example@email.net>"]
 description = "Some text"
 edition = "2018"
 license = "MIT OR Apache-2.0"
