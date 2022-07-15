@@ -39,7 +39,7 @@ pub mod request_handlers {
         if let Some(user) = session.get::<String>("user")? {
             welcome = format!("Welcome! {}", user);
         } else {
-            welcome = "Welcome Anonymous!".to_string();
+            welcome = "Welcome!".to_string();
         }
         let mut ctx = Context::new();
         ctx.insert("title", app_state.get_app_name().as_str());
